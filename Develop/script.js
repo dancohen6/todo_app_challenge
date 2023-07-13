@@ -6,7 +6,7 @@ $(function() {
       time: $(this).parent().attr("id"),
       task: $(this).prev().val(),
     };
-// RETRIEVE TASKS AND PUSH NEW TO tasksArray, SAVE TO localStorage //
+    // RETRIEVE TASKS AND PUSH NEW TO tasksArray, SAVE TO localStorage //
     var tasksArray = getTasks();
     tasksArray.push(item);
     saveUserData(tasksArray);
@@ -25,7 +25,7 @@ $(function() {
     return parsed;
   }
 
-  // APPLY CSS //
+// APPLY CSS //
 
   // RETRIEVE HOUR FROM ELEMENT'S ID, COMPARE WITH CURRENT HOUR FROM DAYJS, APPLY CSS CLASS //
   $(".time-block").each(function() {
@@ -39,7 +39,13 @@ $(function() {
     }
   });
 
-  
+  // ITERATE OVER TIME BLOCK ELEMENTS, RETRIVE TIME AND CALL SAVED TASK TO RETREIVE FROM localStorage. SET VALUE //
+  $(".time-block").each(function() {
+    var time = $(this).attr("id");
+    var savedTask = getSavedTask(time);
+    $(this).find("textarea").val(savedTask);
+  });
+
 
 $("#currentDay").text(dayjs().format("MMMM D, YYYY"));
 });

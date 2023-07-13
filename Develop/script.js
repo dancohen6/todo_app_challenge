@@ -18,5 +18,12 @@ $(function() {
     localStorage.setItem("tasks", jsonVal);
   }
 
+  // RETRIEVE TASKS FROM localStorage, PARSE BACK INTO ARRAY, RETURN ARRAY. RETURN EMPTY ARRAY IF NO TASK //
+  function getTasks() {
+    var rawData = localStorage.getItem("tasks");
+    var parsed = JSON.parse(rawData) || [];
+    return parsed;
+  }
+
 $("#currentDay").text(dayjs().format("MMMM D, YYYY"));
 });

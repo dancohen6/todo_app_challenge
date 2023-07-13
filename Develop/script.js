@@ -25,5 +25,21 @@ $(function() {
     return parsed;
   }
 
+  // APPLY CSS //
+
+  // RETRIEVE HOUR FROM ELEMENT'S ID, COMPARE WITH CURRENT HOUR FROM DAYJS, APPLY CSS CLASS //
+  $(".time-block").each(function() {
+    var hour = $(this).attr("id").split("-")[1];
+    if (hour < dayjs().hour()) {
+      $(this).removeClass("future present").addClass("past");
+    } else if (hour > dayjs().hour()) {
+      $(this).removeClass("past present").addClass("future");
+    } else {
+      $(this).removeClass("past future").addClass("present");
+    }
+  });
+
+  
+
 $("#currentDay").text(dayjs().format("MMMM D, YYYY"));
 });

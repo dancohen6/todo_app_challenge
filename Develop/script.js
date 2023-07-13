@@ -46,6 +46,19 @@ $(function() {
     $(this).find("textarea").val(savedTask);
   });
 
+  // RETRIEVE SAVED TASK FROM localStorage, RETRIEVE STORED JSON, PARSE BACK INTO ARRAY. FIND TASK OBJECT AND RETURN TASK IF TIME MATCHES //
+  function getSavedTask(time) {
+    var rawData = localStorage.getItem("tasks");
+    var parsed = JSON.parse(rawData) || [];
+    var task = parsed.find(function(item) {
+      return item.time === time;
+    });
+    if (task) {
+      return task.task;
+    } else {
+      return "";
+    }
+  }
 
 $("#currentDay").text(dayjs().format("MMMM D, YYYY"));
 });
